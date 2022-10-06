@@ -1,27 +1,22 @@
 package main
 
 import (
+	"github.com/austin-higgins/handlers"
 	"net/http"
 	"log"
 	"fmt"
 	"io"
+	"os"
 )
 
-func main() {
-	http.HandleFunc("/", func(rw http.ResponseWriter, r*http.Request){
-		log.Println("Hello World")
-		d, err := io.ReadAll(r.Body)
-		if err != nil {
-			http.Error(rw, "Oops", http.StatusBadRequest)
-			return
-		}
+func main() { 
+	l := log.New(os.Stdout, "product-api", log.LstdFlags)
+	hh := handlers.NewHello(l)
+	
+	sm := http.NewServeMux()
+	sm.Handle("/", hh)
 
-		fmt.Fprintf(rw,"Hello %s", d)
-	})
-
-	http.HandleFunc("/goodbye", func(http.ResponseWriter, *http.Request){
-		log.Println("Goodbye World")
-	})
+	http.HandleFunc()
 
 	http.ListenAndServe(":4040", nil)
 }

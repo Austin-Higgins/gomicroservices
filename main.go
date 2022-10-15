@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/austin-higgins/gomicroservices/handlers"
+	"gomicroservices/handlers"
 	"net/http"
 	"log"
 	"fmt"
